@@ -86,3 +86,10 @@ yarn dev
 yarn model
 pm2 start bin/api.js
 ```
+
+#### 请求地址
+```
+http://localhost:3001/api/base?name=123
+http://localhost:3001/api/base/index2
+http://localhost:3001/api/base/index3
+```

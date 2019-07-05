@@ -6,4 +6,6 @@ logs/*
 .idea
 package-lock.json
 yarn.lock
+models
+models/*
 
