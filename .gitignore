@@ -2,10 +2,12 @@
 .logs
 logs
 logs/*
-.idea/*
 .idea
+.idea/*
 package-lock.json
 yarn.lock
 models
 models/*
+.git
+.git/*
 
