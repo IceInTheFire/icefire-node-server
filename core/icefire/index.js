@@ -12,7 +12,7 @@ module.exports = (app) => {
     app.use(getParams);
     app.use(service({
         // serviceRoot: path.join(__dirname, 'service'),
-        serviceRoot: path.join(global.__base, 'service')
+        serviceRoot: path.join(__base, 'service')
     }))
     app.use(onerror);   // 页面的错误机制
 }

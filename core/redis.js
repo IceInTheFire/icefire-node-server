@@ -1,4 +1,4 @@
-const redisConfig = require('../config/redis.js');
+const redisConfig = require(__base + 'config/redis.js');
 const redis = require("redis"),
     RDS_PORT = redisConfig.RDS_PORT,            //服务器端口
     RDS_HOST = redisConfig.RDS_HOST,            //服务器ip

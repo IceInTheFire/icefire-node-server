@@ -68,7 +68,29 @@
     ctx.error       extend文件夹内定义的
     ctx.toJSON      extend文件夹内定义的
 ```
+#### mysql操作介绍（数据库分表）
+```
+    config文件夹下的sql.js
+        subTable属性：是否分表的选项。
+            true：为分表。（水平分表，根据id分表，当id超过百万时，分表）
+                service文件夹下的base.js里增删改查是分表的增删改查写法
+            false：为普通的sequelize写法，
+
+        stepCount属性：在subTable为true下有用
+            水平分表是当表的自增长id大于多少时则分表，默认是百万。
+            stepCount是为了自定义每张表自增长id大于多少时分表，
+            注：正式开发时把user里的10去掉。
+
+    注：
+    step表是标识分表用的，切忌不能删除，一删，分表就出问题了。
+    每新增一张表的时候，设置字段自增长id，还要在step表里加上新增表的名称并赋值为0
+```
 #### 跑项目之前
+0、环境配置
+```
+    将sql文件夹下的sql文件导入到mysql里。
+    配置好config文件夹下的mysql和redis文件
+```
 1、下载依赖
 ```
 yarn
@@ -89,7 +111,28 @@ pm2 start bin/api.js
 
 #### 请求地址
 ```
-http://localhost:3001/api/base?name=123
-http://localhost:3001/api/base/index2
-http://localhost:3001/api/base/index3
+# 普通页面测试地址请求
+http://localhost:3001/api/base/test/index
+http://localhost:3001/api/base/test/index2
+http://localhost:3001/api/base/test/index3
+http://localhost:3001/api/base/test/index4
+
+# mysql测试页面地址请求
+#### 增
+http://localhost:3001/api/base/test/dbInsert?name=冰火&age=15&sex=1     # 若在config/sql.js里subTable为true且stepCount对象下的user为10，则访问该地址十多次二十多次，可看到数据库里分表。
+
+#### 查
+http://localhost:3001/api/base/test/dbFindAndCountAll
+http://localhost:3001/api/base/test/dbFindAll
+http://localhost:3001/api/base/test/dbFindOne?id=2
+
+#### 改
+http://localhost:3001/api/base/test/dbUpdate?id=2&name=冰火
+#### 删
+http://localhost:3001/api/base/test/dbDel?id=2
+http://localhost:3001/api/base/test/dbDel?name=%E9%BB%98%E8%AE%A4
+
+# redis请求地址
+http://localhost:3001/api/base/test/redisInsert
+http://localhost:3001/api/base/test/redisGet
 ```

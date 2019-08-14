@@ -1,6 +1,6 @@
-const tool = require('../../tool');
-const db = require('../db');
-const redis = require('../redis');
+const tool = require(__base + 'tool');
+const db = require(__base + 'core/db');
+const redis = require(__base + 'core/redis');
 
 let base = async (ctx, next)=>{
     ctx.db = db;

@@ -1,4 +1,4 @@
-const {  accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger } = require('../logger');
+const {  accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger } = require(__base + 'core/logger');
 
 const handler = async (ctx, next) => {
     try {
@@ -11,6 +11,7 @@ const handler = async (ctx, next) => {
         };
         accessSimpleLogger.error(url + err);        // 简单记录报错
         accessErrorLogger.error(err);               // 报错详情
+        console.log(err);
 
         // 手动释放error事件
         // ctx.app.emit('error', err, ctx);

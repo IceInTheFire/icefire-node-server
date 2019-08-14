@@ -1,17 +1,17 @@
-global.__base = __dirname + '/';        //设置全局require目录前缀
+global.__base = __dirname + '/';        // 设置全局require目录前缀
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
 // const json = require('koa-json')
 const bodyparser = require('koa-bodyparser');       //获取post请求的参数
+const {  accessLogger, systemLogger, accessErrorLogger } = require(__base + 'core/logger');
+const icefire = require(__base + 'core/icefire/');
 
-const icefire = require('./core/icefire/');
 
-const {  accessLogger, systemLogger, accessErrorLogger } = require('./core/logger');
 const compress = require('koa-compress');   //压缩
 const helmet = require("koa-helmet");       //安全
 const favicon = require('koa-favicon');     //favicon
-const routeEach = require('./core/routeEach');
+const routeEach = require(__base + 'core/routeEach');
 
 
 app.use(bodyparser());
@@ -27,22 +27,14 @@ app.use(compress(options));
 
 app.use(helmet());
 // app.use(json())
-
-// app.use(require('koa-static')(__dirname + '/public'))
+// 静态资源托管
+app.use(require('koa-static-server')({rootDir:__dirname + '/public', rootPath:'/public'}));
 
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(views(__dirname + '/views', {
     extension: 'pug'
 }))
 
-
-// logger
-// app.use(async (ctx, next) => {
-//     const start = new Date()
-//     await next()
-//     const ms = new Date() - start
-//     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-// })
 
 routeEach(app, '/api');     // 路由地址
 

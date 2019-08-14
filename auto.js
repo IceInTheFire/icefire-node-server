@@ -1,3 +1,4 @@
+// global.__base = __dirname + '/';        // 设置全局require目录前缀
 const SequelizeAuto = require('sequelize-auto')
 const config = require('./config/sql');
 const fs = require('fs');

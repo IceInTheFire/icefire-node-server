@@ -1,7 +1,7 @@
 const oauth = require(__base + 'middlewares/oauth');
 const page = async (ctx, next) => {
-
-    ctx.body = await ctx.service.test.getData();
+    let { name, sex, age, id } = ctx.params;  // 获取参数
+    ctx.success(await ctx.service.test.findOne({ name, sex, age, id }));
 }
 
 
