@@ -112,7 +112,7 @@ pm2 start bin/api.js
 #### 请求地址
 ```
 # 普通页面测试地址请求
-http://localhost:3001/api/base/test/index
+http://localhost:3001/api/base/test/
 http://localhost:3001/api/base/test/index2
 http://localhost:3001/api/base/test/index3
 http://localhost:3001/api/base/test/index4
