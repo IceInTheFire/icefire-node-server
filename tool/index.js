@@ -28,13 +28,14 @@ module.exports = {
      * 如果不是，则照样返回
      */
     toSqlStr(str) {
-        if (typeof str == "string") {
+        if (typeof str == 'string') {
             return `"${str}"`;
         } else {
             return str;
         }
     },
 };
+
 /**
  *
  * @param {object} obj
@@ -42,7 +43,7 @@ module.exports = {
  */
 function delEmptyKey(obj) {
     let result = {};
-    /////////Object.entries遍历键值对/////////
+    /* Object.entries遍历键值对 */
     // let obj = { a: 1, b: 2, c: function () { } };
     // Object.entries(obj)//[['a',1],['b', 2], ['c',function]]返回对象键值对数组
     Object.entries(obj).forEach((value, index) => {
@@ -58,7 +59,7 @@ function delEmptyKey(obj) {
 * 判断msg是否是对象，并判断不是数组
 * */
 function isObject(obj) {
-    return (typeof obj == "object" && !Array.isArray(obj));
+    return (typeof obj == 'object' && !Array.isArray(obj));
 }
 
 /*
@@ -75,9 +76,9 @@ function isMobile(mobile) {
  */
 function isInt(str) {
     var patrn = /^[0-9]*$/;
-    if (patrn.exec(str) == null || str == "") {
-        return false
+    if (patrn.exec(str) == null || str == '') {
+        return false;
     } else {
-        return true
+        return true;
     }
 }

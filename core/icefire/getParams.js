@@ -1,5 +1,4 @@
-
-let getParams = async (ctx, next)=>{
+let getParams = async(ctx, next) => {
     // ctx.body = {
     //     url: ctx.url,
     //     ctx_query: ctx.query,
@@ -19,6 +18,6 @@ let getParams = async (ctx, next)=>{
 
     ctx.params = Object.assign(ctx.params || {}, ctx.query || {}, ctx.request.body || {});
     await next();
-}
+};
 
 module.exports = getParams;

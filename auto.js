@@ -1,5 +1,5 @@
 // global.__base = __dirname + '/';        // 设置全局require目录前缀
-const SequelizeAuto = require('sequelize-auto')
+const SequelizeAuto = require('sequelize-auto');
 const config = require('./config/sql');
 const fs = require('fs');
 
@@ -14,31 +14,32 @@ const auto = new SequelizeAuto(
             timestamps: false
         }
     }
-)
-
+);
 
 // 删除文件夹
-function delDir(path){
+function delDir(path) {
     let files = [];
-    if(fs.existsSync(path)){
+    if (fs.existsSync(path)) {
         files = fs.readdirSync(path);
         files.forEach((file, index) => {
-            let curPath = path + "/" + file;
-            if(fs.statSync(curPath).isDirectory()){
-                delDir(curPath); //递归删除文件夹
+            let curPath = path + '/' + file;
+            if (fs.statSync(curPath).isDirectory()) {
+                delDir(curPath); // 递归删除文件夹
             } else {
-                fs.unlinkSync(curPath); //删除文件
+                fs.unlinkSync(curPath); // 删除文件
             }
         });
         fs.rmdirSync(path);
     }
 }
 
-auto.run(function (err) {
-    if (err) throw err;
+auto.run(function(err) {
+    if (err) {
+        throw err;
+    }
     // console.log(auto.tables); // table list
     // console.log(auto.foreignKeys); // foreign key list
 
-    //生成models表后，直接执行项目
+    // 生成models表后，直接执行项目
     // require('./bin/api');
 });

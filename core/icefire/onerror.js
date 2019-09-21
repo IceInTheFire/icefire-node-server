@@ -1,6 +1,6 @@
-const {  accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger } = require(__base + 'core/logger');
+const {accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger} = require(global.__base + 'core/logger');
 
-const handler = async (ctx, next) => {
+const handler = async(ctx, next) => {
     try {
         await next();
     } catch (err) {
@@ -20,6 +20,5 @@ const handler = async (ctx, next) => {
         // ctx.throw(500);
     }
 };
-
 
 module.exports = handler;

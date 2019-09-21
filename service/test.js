@@ -180,7 +180,6 @@ class testService {
         return result;
     }
 
-
     async redisInsert() {
         const {ctx} = this;
         let result = await ctx.redis.common.insertListInDB('冰火', '你好，我的伙伴');

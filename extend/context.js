@@ -1,4 +1,3 @@
-
 module.exports = {
     /**
      * 成功返回的格式
@@ -8,7 +7,7 @@ module.exports = {
         this.ctx.body = {
             code: 1000,
             data
-        }
+        };
     },
     /**
      * 失败返回的格式
@@ -19,7 +18,7 @@ module.exports = {
             code: 1002,
             data: null,
             msg: errorMsg || '',
-        }
+        };
         // this.ctx.status = 402
     },
     toJSON(data, msg, code) {
@@ -27,7 +26,7 @@ module.exports = {
             code: code || 1000,
             data: data,
             msg: msg || ''
-        }
+        };
         /*
         * code
         * 1000   请求接口成功
@@ -36,4 +35,4 @@ module.exports = {
         * 1004   权限不够，前端直接跳转到首页
         * */
     }
-}
+};

@@ -1,12 +1,10 @@
-const path = require('path')
-const glob = require('glob');   //读取本地的.js格式文件，
-
+const path = require('path');
+const glob = require('glob');   // 读取本地的.js格式文件，
 
 let defaultOptions = {
     serviceRoot: path.join(process.cwd(), 'service/'),
     extendRoot: path.join(process.cwd(), 'extend/'),
-}
-
+};
 
 /*
 * 将url地址转换为对象
@@ -39,19 +37,19 @@ let defaultOptions = {
 *
 *   return cacheMap;
 * */
-function urlToObj(serviceRoot, files, cacheMap){
+function urlToObj(serviceRoot, files, cacheMap) {
     files.forEach((value, index) => {
-        let valueArr = value.split("/");
-        if(valueArr.length <= 1) {
-            let name = valueArr[0].substring(0,valueArr[0].length-3);       //去掉最后的.js
+        let valueArr = value.split('/');
+        if (valueArr.length <= 1) {
+            let name = valueArr[0].substring(0, valueArr[0].length - 3);       // 去掉最后的.js
             cacheMap[name] = require(serviceRoot + '/' + valueArr[0]);
-        } else if(valueArr.length == 2) {
+        } else if (valueArr.length == 2) {
             let name = valueArr[0];
-            let name2 = valueArr[1].substring(0,valueArr[1].length-3);       //去掉最后的.js
-            if(cacheMap[name] === undefined){   //如果全等于undefined
+            let name2 = valueArr[1].substring(0, valueArr[1].length - 3);       // 去掉最后的.js
+            if (cacheMap[name] === undefined) {   // 如果全等于undefined
                 cacheMap[name] = {};
             }
-            cacheMap[name][name2] = require(serviceRoot + '/' +  name + '/' +  name2);
+            cacheMap[name][name2] = require(serviceRoot + '/' + name + '/' + name2);
         }
         // else if(valueArr.length == 3) {
         //     let name = valueArr[0];
@@ -63,30 +61,29 @@ function urlToObj(serviceRoot, files, cacheMap){
         //     cacheMap[name][name2][name3] = require(serviceRoot + '/' +  name + '/' +  name2 + '/' + name3);
         // }
         else {
-            let name = valueArr.splice(0,1);
-            let filesArr = valueArr.join("/");
-            if(cacheMap[name] === undefined){   //如果全等于undefined
+            let name = valueArr.splice(0, 1);
+            let filesArr = valueArr.join('/');
+            if (cacheMap[name] === undefined) {   // 如果全等于undefined
                 cacheMap[name] = {};
             }
-            cacheMap[name] = Object.assign(cacheMap[name], urlToObj(serviceRoot+'/'+name, filesArr, cacheMap[name]));
+            cacheMap[name] = Object.assign(cacheMap[name], urlToObj(serviceRoot + '/' + name, filesArr, cacheMap[name]));
         }
-    })
+    });
     return cacheMap;
 }
 
-
 let service = (options) => {
-    options = options || {}
-    options = Object.assign({}, defaultOptions, options)
-    const files = glob.sync('**/*.js', { nodir: true, cwd: options.serviceRoot })
-    let cacheMap = urlToObj(options.serviceRoot,files,{});
+    options = options || {};
+    options = Object.assign({}, defaultOptions, options);
+    const files = glob.sync('**/*.js', {nodir: true, cwd: options.serviceRoot});
+    let cacheMap = urlToObj(options.serviceRoot, files, {});
     // console.log(cacheMap);
-    let serviceMiddleWare = async (ctx, next) => {
+    let serviceMiddleWare = async(ctx, next) => {
         let handler = {
             get: function(target, name) {
-                if(typeof target[name] == 'object') {
+                if (typeof target[name] == 'object') {
                     return new Proxy(target[name], handler);
-                } else{
+                } else {
                     let service = selfish(new (target[name])(), ctx);
                     return service;
                 }
@@ -97,7 +94,7 @@ let service = (options) => {
         /*
         * 种下 extend里的方法start
         * */
-        let extend = require(options.extendRoot+'context.js');
+        let extend = require(options.extendRoot + 'context.js');
         ctx.extend = selfish(extend, ctx);
         Object.assign(ctx, ctx.extend);
         delete ctx.extend;
@@ -106,16 +103,15 @@ let service = (options) => {
         * */
 
         await next();
-    }
+    };
 
-    return serviceMiddleWare
-}
+    return serviceMiddleWare;
+};
 
-
-function selfish (target, ctx) {
+function selfish(target, ctx) {
     const cache = new WeakMap();
     const handler = {
-        get (target, key) {
+        get(target, key) {
             const value = Reflect.get(target, key);
             if (typeof value !== 'function') {
                 return value;
@@ -129,9 +125,5 @@ function selfish (target, ctx) {
     const proxy = new Proxy(target, handler);
     return proxy;
 }
-
-
-
-
 
 module.exports = service;
