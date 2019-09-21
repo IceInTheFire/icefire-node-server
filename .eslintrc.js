@@ -240,7 +240,7 @@ module.exports = {
         "prefer-const": 0,
         "quote-props": 0,
         "quotes": [2, "single", "avoid-escape"],
-        "radix": 2,
+        "radix": 0, // parseInt必须指定第二个参数
         // "semi": ["error", "always"],
         "semi": [
             "error",
