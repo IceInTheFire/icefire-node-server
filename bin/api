@@ -8,6 +8,23 @@ var app = require('../app');
 var debug = require('debug')('demo:server');
 var http = require('http');
 
+// 使用node进程 来处理负载任务
+const cluster = require('cluster');
+const numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+    console.log(`Master ${process.pid} is running`);
+
+    for (let i = 0; i < numCPUs; i++) {
+        cluster.fork();
+    }
+
+    cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
+    });
+    return;
+}
+
 /**
  * Get port from environment and store in Express.
  */

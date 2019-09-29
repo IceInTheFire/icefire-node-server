@@ -34,5 +34,23 @@ module.exports = {
         * 1003   token验证失败，前端直接跳转到登录页
         * 1004   权限不够，前端直接跳转到首页
         * */
+    },
+    /*
+    * 专供于service返回信息
+    * */
+    toData({isSuccess = false, data = null, msg = null} = {}) {
+        return {isSuccess, data, msg};
+    },
+    /*
+    * 专供于service返回成功信息
+    * */
+    toSuccess(data) {
+        return {isSuccess: true, data};
+    },
+    /*
+     * 专供于service返回失败信息
+     * */
+    toError(msg) {
+        return {isSuccess: false, msg};
     }
 };

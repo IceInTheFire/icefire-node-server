@@ -97,4 +97,10 @@ let redisFn = {
         },
     },
 };
-module.exports = redisFn;
+module.exports = {
+    client,
+    client2,
+    client3,
+    ...redisFn,
+};
+
