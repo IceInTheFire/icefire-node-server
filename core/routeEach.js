@@ -30,7 +30,7 @@ function routeEach(app, baseUrl, pathArr, basePathStr, basePath) {
             } else {
                 str = `${basePathStr}/${pathArr[i].substring(0, pathArr[i].length - 3)}`;
             }
-            let pageParams = Object.assign({
+            let initParams = {
                 page: async(ctx, next) => {
                     ctx.body = '空白页哦';
                 },
@@ -39,7 +39,10 @@ function routeEach(app, baseUrl, pathArr, basePathStr, basePath) {
                 after: [function(ctx) {
                     ctx.throw(500);
                 }]
-            }, require(pathStr));
+            };
+            let pageParams = Object.assign({}, initParams, require(pathStr));
+            pageParams.before = initParams.before.concat(pageParams.before);
+            pageParams.after = initParams.after.concat(pageParams.after);
             str = baseUrl + str;
             console.log(str);
             router[pageParams.method](str, ...pageParams.before, pageParams.page, ...pageParams.after);
