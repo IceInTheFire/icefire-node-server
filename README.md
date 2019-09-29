@@ -79,7 +79,11 @@
         stepCount属性：在subTable为true下有用
             水平分表是当表的自增长id大于多少时则分表，默认是百万。
             stepCount是为了自定义每张表自增长id大于多少时分表，
-            注：正式开发时把user里的10去掉。
+            注：正式开发时把user去掉。
+
+        timestamp属性：这个参数为true是MySQL会自动给每条数据添加createdAt和updateAt字段。createdAt和updateAt需要我们自己在新建表时定义（sequelize的字段）
+
+        paranoid属性：设置 deletedAt 字段，当删除一条记录的时候，并不是真的销毁记录，而是通过该字段来标示，即保留数据，进行假删除，默认为false   仅在timestamp启用下使用。  deletedAt需要我们自己在新建表时定义（sequelize的字段）
 
     注：
     step表是标识分表用的，切忌不能删除，一删，分表就出问题了。
@@ -88,7 +92,7 @@
 #### 跑项目之前
 0、环境配置
 ```
-    将sql文件夹下的sql文件导入到mysql里。
+    将sql文件夹下的sql文件导入到mysql的timotest表里。
     配置好config文件夹下的mysql和redis文件
 ```
 1、下载依赖

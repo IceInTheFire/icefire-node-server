@@ -11,7 +11,10 @@ const auto = new SequelizeAuto(
         directory: './models', // prevents the program from writing to disk
         port: config.port,
         additional: {
-            timestamps: false
+            timestamps: config.timestamp,
+            paranoid: config.paranoid,
+            // 要将 deletedAt 设置为 destroyTime (注意要启用paranoid)
+            // deletedAt: 'destroyTime',
         }
     }
 );
