@@ -31,7 +31,7 @@
     "mysql2": "^1.6.5",
     "pug": "^2.0.0-rc.1",
     "redis": "^2.8.0",
-    "sequelize": "^5.9.2",
+    "sequelize": "^5.15.1",
     "sequelize-auto": "^0.4.29"
   },
   "devDependencies": {
