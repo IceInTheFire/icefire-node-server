@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "babel-eslint": "^10.0.3",
+    "best-require": "^1.1.4",
     "debug": "^2.6.3",
     "eslint": "^3.6.0",
     "eslint-config-airbnb": "^11.2.0",

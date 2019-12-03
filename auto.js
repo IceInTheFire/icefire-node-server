@@ -1,9 +1,10 @@
 // global.__base = __dirname + '/';        // 设置全局require目录前缀
+require('best-require')(process.cwd());  // 添加require里的~/功能
 const SequelizeAuto = require('sequelize-auto');
-const config = require('./config/sql');
+const config = require('~/config/sql');
 const fs = require('fs');
 
-delDir('./models');     // 先删除
+delDir('~/models');     // 先删除
 const auto = new SequelizeAuto(
     config.database, config.user, config.password, {
         host: config.host,

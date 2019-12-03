@@ -2,9 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const router = require('koa-router')();
 
-const basePathG = path.join(global.__base, 'controller');
-// const basePathG = path.join(__dirname, '../controller');
-// const basePathG = path.join('controller');
+const basePathG = path.join(process.cwd(), 'controller');
 let arrG = fs.readdirSync(basePathG);
 let basePathStrG = '';
 

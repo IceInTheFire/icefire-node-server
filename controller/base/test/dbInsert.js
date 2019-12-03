@@ -1,4 +1,4 @@
-const oauth = require(global.__base + 'middlewares/oauth');
+const oauth = require('~/middlewares/oauth');
 const page = async(ctx, next) => {
     let {name = '默认', sex = 1, age = 20} = ctx.params;  // 获取参数
     ctx.success(await ctx.service.test.insert({name, sex, age}));

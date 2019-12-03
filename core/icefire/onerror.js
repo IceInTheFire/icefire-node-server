@@ -1,4 +1,5 @@
-const {accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger} = require(global.__base + 'core/logger');
+// const {accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger} = require(global.__base + 'core/logger');
+const {accessLogger, systemLogger, accessErrorLogger, accessSimpleLogger} = require('~/core/logger');
 
 const handler = async(ctx, next) => {
     try {

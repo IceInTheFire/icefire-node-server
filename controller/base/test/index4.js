@@ -1,4 +1,4 @@
-const oauth = require(global.__base + 'middlewares/oauth');
+const oauth = require('~/middlewares/oauth');
 const page = async(ctx, next) => {
 
     ctx.body = await ctx.service.like.book.get();

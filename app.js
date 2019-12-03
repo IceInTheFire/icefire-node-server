@@ -1,16 +1,19 @@
 global.__base = __dirname + '/';        // 设置全局require目录前缀
+require('best-require')(process.cwd());  // 添加require里的~/功能
+
 const Koa = require('koa');
 const app = new Koa();
 const views = require('koa-views');
 // const json = require('koa-json')
 const bodyparser = require('koa-bodyparser');       // 获取post请求的参数
-const {accessLogger, systemLogger, accessErrorLogger} = require(__base + 'core/logger');
-const icefire = require(global.__base + 'core/icefire/');
+const {accessLogger, systemLogger, accessErrorLogger} = require('~/core/logger');
+const icefire = require('~/core/icefire/');
 
 const compress = require('koa-compress');   // 压缩
 const helmet = require('koa-helmet');       // 安全
 const favicon = require('koa-favicon');     // favicon
-const routeEach = require(global.__base + 'core/routeEach');
+// const routeEach = require(global.__base + 'core/routeEach');
+const routeEach = require('~/core/routeEach');
 
 app.use(bodyparser());
 

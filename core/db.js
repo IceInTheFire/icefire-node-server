@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 const fs = require('fs');
 const path = require('path');
-const config = require(global.__base + 'config/sql');
-const {sqlLog} = require(global.__base + 'core/logger');
+const {sqlLog} = require('~/core/logger');
+const config = require('~/config/sql');
 
-const basePathG = path.join(global.__base, 'models');
+const basePathG = path.join(process.cwd(), 'models');
 
 let models = fs.readdirSync(basePathG);
 let stepDb = null;

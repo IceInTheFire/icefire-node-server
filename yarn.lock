@@ -340,6 +340,11 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
+best-require@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.npm.taobao.org/best-require/download/best-require-1.1.4.tgz#2cd5211fa455bbb94fe746fd4356a55c100e38ba"
+  integrity sha1-LNUhH6RVu7lP50b9Q1alXBAOOLo=
+
 bignumber.js@4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.1.0.tgz#db6f14067c140bd46624815a7916c92d9b6c24b1"

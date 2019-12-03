@@ -1,4 +1,5 @@
-const oauth = require(global.__base + 'middlewares/oauth');
+// const oauth = require('~/middlewares/oauth');
+const oauth = require('~/middlewares/oauth');
 
 const page = async(ctx, next) => {
     ctx.success(`${ ctx.name }，欢迎你来到我的冰火世界，你的名字，我是从中间件里获取的`);
