@@ -1,35 +1,41 @@
 /*
-Navicat MySQL Data Transfer
+ Navicat Premium Data Transfer
 
-Source Server         : 本地连接
-Source Server Version : 50727
-Source Host           : localhost:3306
-Source Database       : timotest
+ Source Server         : 宜果送
+ Source Server Type    : MySQL
+ Source Server Version : 50726
+ Source Host           : rm-bp11sk9xkq10w58j0co.mysql.rds.aliyuncs.com:3306
+ Source Schema         : group
 
-Target Server Type    : MYSQL
-Target Server Version : 50727
-File Encoding         : 65001
+ Target Server Type    : MySQL
+ Target Server Version : 50726
+ File Encoding         : 65001
 
-Date: 2019-09-29 16:23:44
+ Date: 31/03/2020 18:57:28
 */
 
-SET FOREIGN_KEY_CHECKS=0;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for step
 -- ----------------------------
 DROP TABLE IF EXISTS `step`;
 CREATE TABLE `step` (
-  `user` int(255) unsigned zerofill DEFAULT NULL COMMENT '用户标识',
+  `user` int(100) unsigned DEFAULT NULL COMMENT '用户标识',
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `deletedAt` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `deletedAt` datetime DEFAULT NULL,
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
 -- Records of step
 -- ----------------------------
-INSERT INTO `step` VALUES ('000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', null, '2019-09-29 16:23:32', null);
+BEGIN;
+INSERT INTO `step` VALUES (1, NULL, '2020-03-31 18:56:48', NULL, 1);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for user
@@ -44,8 +50,6 @@ CREATE TABLE `user` (
   `name` varchar(100) DEFAULT '' COMMENT '姓名',
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- ----------------------------
--- Records of user
--- ----------------------------
+SET FOREIGN_KEY_CHECKS = 1;
