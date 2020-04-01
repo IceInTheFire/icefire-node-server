@@ -10,4 +10,5 @@ models
 models/*
 .git
 .git/*
+.yarn.lock
 
