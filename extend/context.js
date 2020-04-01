@@ -16,7 +16,7 @@ module.exports = {
     error(errorMsg) {
         this.ctx.body = {
             code: 1002,
-            data: null,
+            // data: null,
             msg: errorMsg || '',
         };
         // this.ctx.status = 402
@@ -30,7 +30,7 @@ module.exports = {
         /*
         * code
         * 1000   请求接口成功
-        * 1002   代码错误，前端直接显示报错信息
+        * 1002   提示错误信息，前端直接显示报错信息
         * 1003   token验证失败，前端直接跳转到登录页
         * 1004   权限不够，前端直接跳转到首页
         * */
