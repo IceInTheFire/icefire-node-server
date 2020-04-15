@@ -16,7 +16,6 @@ module.exports = {
     error(errorMsg) {
         this.ctx.body = {
             code: 1002,
-            // data: null,
             msg: errorMsg || '',
         };
         // this.ctx.status = 402

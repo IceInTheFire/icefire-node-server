@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const router = require('koa-router')();
-
+const sign = require('~/middlewares/sign');
 const basePathG = path.join(process.cwd(), 'controller');
 let arrG = fs.readdirSync(basePathG);
 let basePathStrG = '';
@@ -33,6 +33,7 @@ function routeEach(app, baseUrl, pathArr, basePathStr, basePath) {
                     ctx.body = '空白页哦';
                 },
                 method: 'all',
+                // before: [sign],
                 before: [],
                 after: [function(ctx) {
                     ctx.throw(500);
