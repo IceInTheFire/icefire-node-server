@@ -15,7 +15,7 @@ const auto = new SequelizeAuto(
             timestamps: config.timestamp,
             paranoid: config.paranoid,
             // 要将 deletedAt 设置为 destroyTime (注意要启用paranoid)
-            // deletedAt: 'destroyTime',
+            deletedAt: 'destroyTime',
         }
     }
 );
