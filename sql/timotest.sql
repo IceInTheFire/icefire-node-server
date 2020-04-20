@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 31/03/2020 18:57:28
+ Date: 20/04/2020 15:31:04
 */
 
 SET NAMES utf8mb4;
@@ -22,11 +22,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 -- ----------------------------
 DROP TABLE IF EXISTS `step`;
 CREATE TABLE `step` (
-  `user` int(100) unsigned DEFAULT NULL COMMENT '用户标识',
-  `createdAt` datetime DEFAULT NULL,
-  `updatedAt` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `deletedAt` datetime DEFAULT NULL,
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `tableName` varchar(100) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `deletedAt` datetime DEFAULT NULL,
+  `number` int(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
@@ -34,7 +35,7 @@ CREATE TABLE `step` (
 -- Records of step
 -- ----------------------------
 BEGIN;
-INSERT INTO `step` VALUES (1, NULL, '2020-03-31 18:56:48', NULL, 1);
+INSERT INTO `step` VALUES (1, 'user', NULL, '2020-04-20 07:04:01', NULL, 0);
 COMMIT;
 
 -- ----------------------------
@@ -42,12 +43,12 @@ COMMIT;
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sex` int(11) DEFAULT NULL COMMENT '1为男，2为女',
-  `age` int(11) DEFAULT NULL COMMENT '年龄',
-  `createdAt` datetime DEFAULT CURRENT_TIMESTAMP,
-  `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `name` varchar(100) DEFAULT '' COMMENT '姓名',
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `sex` int(10) DEFAULT NULL,
+  `age` int(10) DEFAULT NULL,
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
