@@ -1,10 +1,10 @@
-// global.__base = __dirname + '/';        // 设置全局require目录前缀
+global.__base = __dirname + '/';        // 设置全局require目录前缀
 require('best-require')(process.cwd());  // 添加require里的~/功能
 const SequelizeAuto = require('sequelize-auto');
 const config = require('~/config/sql');
 const fs = require('fs');
 
-delDir('~/models');     // 先删除
+delDir(global.__base + 'models');     // 先删除
 const auto = new SequelizeAuto(
     config.database, config.user, config.password, {
         host: config.host,
@@ -14,8 +14,9 @@ const auto = new SequelizeAuto(
         additional: {
             timestamps: config.timestamp,
             paranoid: config.paranoid,
-            // 要将 deletedAt 设置为 destroyTime (注意要启用paranoid)
-            deletedAt: 'destroyTime',
+            // autoIncrement: true,
+            // 要将表里的 deletedAt 设置为 destroyTime (注意要启用paranoid)
+            // deletedAt: 'destroyTime',
         }
     }
 );

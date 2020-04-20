@@ -9,6 +9,12 @@
 
 如果egg是企业级，那么我这个就是专属mysql的个人级后台。
 ```
+#### 最佳环境
+```
+node: v10.13.0  以上
+pm2: v4.2.3 以上
+nodemon：测试环境下，数据库分表暂且有个bug，不影响线上操作
+```
 
 #### 目录介绍
 ```$xslt
@@ -110,7 +116,7 @@ yarn dev
 #### 部署
 ```
 yarn model
-pm2 start bin/api.js
+pm2 start bin/api
 ```
 
 #### 请求地址

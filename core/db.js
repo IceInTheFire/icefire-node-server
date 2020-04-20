@@ -24,17 +24,18 @@ const returnTableName = (str) => {
 * 没表则新增一个表
 * 若isCreat为false并无该表，则直接返回fileName
 * */
-const checkOrCreat = async({tableName, fileName, sequelize, idCount, isCreat}) => {
+const checkOrCreat = async({tableName, fileName, sequelize, idCount }) => {
     // 如果该表未定义就创建表 并且是新增模式下
-    if (!sequelize.isDefined(tableName) && isCreat) {
+    if (!sequelize.isDefined(tableName)) {
         // 获取模型的字符串
         let modelStr = fs.readFileSync(basePathG + `/${fileName}.js`, 'utf-8');
 
         // 替换模型的名称和表名
-        modelStr = modelStr.replace(`sequelize.define('${fileName}'`, `sequelize.define('${tableName}'`).replace(`tableName: '${fileName}',`, `tableName: '${tableName}',`);
+        modelStr = modelStr.replace(`sequelize.define('${fileName}'`, `sequelize.define('${tableName}'`)
+            .replace(`tableName: '${fileName}',`, `tableName: '${tableName}',`);
 
         // 创建模型文件
-        fs.writeFileSync(basePathG + `/${tableName}.js`, modelStr, 'utf-8');
+        await fs.writeFileSync(basePathG + `/${tableName}.js`, modelStr, 'utf-8');
 
         // 引入并定义模型
         await sequelize.import(basePathG + `/${tableName}.js`);
@@ -43,9 +44,8 @@ const checkOrCreat = async({tableName, fileName, sequelize, idCount, isCreat}) =
         // 更改自增值
         await sequelize.query(`alter table ${tableName} auto_increment=${idCount};`);
         return tableName;
-    }
-    else {
-        return fileName;
+    } else {
+        return tableName;
     }
 };
 
@@ -64,9 +64,12 @@ const getTableNum = async({fileName, sequelize, id, isCreat}) => {
         tableCount = Math.ceil((id) / setpCount);    // 表的数量
     } else {    // 新增表获取会用到
         const step = await stepDb.findOne({
-            attributes: [fileName]
+            attributes: ['number'],
+            where: {
+                tableName: fileName
+            }
         });
-        let stepLength = step[fileName];    // 步长数量
+        let stepLength = step.number;    // 步长数量
         setpCount = stepObj[fileName] || 1000000; // 一个表存在多少id
         tableCount = Math.ceil((stepLength + 1) / setpCount);    // 表的数量
     }
@@ -75,8 +78,7 @@ const getTableNum = async({fileName, sequelize, id, isCreat}) => {
         tableName,
         fileName,
         sequelize,
-        idCount: setpCount * (tableCount - 1) + 1,
-        isCreat
+        idCount: setpCount * (tableCount - 1) + 1
     });
 
     return tableName;
@@ -110,9 +112,7 @@ async function dbInit() {
                 return tablesArr;
             },
             findOne: async({ctx, tableName, options}) => {
-                console.log(tableName);
                 let tables = await tool.getTableCount(tableName);
-                console.log(tables);
                 let result = null;
                 for (let value of tables) {
                     result = await ctx.db[value].findOne(options);
@@ -245,17 +245,11 @@ async function dbInit() {
         // 新增请求之后
         dbName.addHook('afterCreate', async(Instance, options, fn) => {
             let data = {};
-            data[fileName] = Instance.id;
-            await stepDb.update(data, {where: {}});  // 更改步长标识
+            data.number = Instance.id;
+            await stepDb.update(data, {where: {tableName: fileName}});  // 更改步长标识
 
             // tableName改回来
             dbName.tableName = fileName;
         });
     });
 }
-
-
-
-
-
-
