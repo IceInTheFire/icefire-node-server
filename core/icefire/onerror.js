@@ -10,16 +10,14 @@ const handler = async(ctx, next) => {
         // ctx.response.body = {
         //     message: err.message
         // };
-
         if(ctx.response.status == 404) {
-            ctx.error('没有该页面');     // 以后也可以自己渲染一个页面
+            ctx.errorCode('NOTFOUND');     // 以后也可以自己渲染一个页面
         } else {
             ctx.error(ctx.response.status + '，未知错误，请复制错误码' + new Date().getTime() + '联系我们');
         }
 
         accessSimpleLogger.error(url + err);        // 简单记录报错
         accessErrorLogger.error(err);               // 报错详情
-        // console.log(err);
 
         // 手动释放error事件
         // ctx.app.emit('error', err, ctx);

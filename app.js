@@ -38,7 +38,7 @@ app.use(views(__dirname + '/views', {
 routeEach(app, '/api');     // 路由地址
 
 app.use((ctx, next) => {
-    ctx.error('没有该页面');
+    ctx.errorCode('NOTFOUND');
     ctx.response.status = 404;
 });
 

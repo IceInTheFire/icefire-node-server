@@ -1,3 +1,5 @@
+const error = require('~/config/error.js');
+
 module.exports = {
     /**
      * 成功返回的格式
@@ -16,9 +18,12 @@ module.exports = {
     error(errorMsg) {
         this.ctx.body = {
             code: 1002,
+            // data: null,
             msg: errorMsg || '',
         };
-        // this.ctx.status = 402
+    },
+    errorCode(errorCode) {
+        this.ctx.body = error[errorCode] || error.NOERROR;
     },
     toJSON(data, msg, code) {
         this.ctx.body = {
