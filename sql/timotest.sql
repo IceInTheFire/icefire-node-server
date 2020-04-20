@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 20/04/2020 15:31:04
+ Date: 20/04/2020 16:57:42
 */
 
 SET NAMES utf8mb4;
@@ -46,9 +46,9 @@ CREATE TABLE `user` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `sex` int(10) DEFAULT NULL,
   `age` int(10) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `createdAt` datetime DEFAULT NULL,
   `updatedAt` datetime DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
