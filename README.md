@@ -79,7 +79,7 @@ nodemon：测试环境下，数据库分表暂且有个bug，不影响线上操�
     config文件夹下的sql.js
         subTable属性：是否分表的选项。
             true：为分表。（水平分表，根据id分表，当id超过百万时，分表）
-                service文件夹下的base.js里增删改查是分表的增删改查写法
+                service文件夹下的base.js里增删改查是分表的增删改查写法，分表暂不支持联表查询。若在意联表查询的话，可以设置为false
             false：为普通的sequelize写法，
 
         stepCount属性：在subTable为true下有用
