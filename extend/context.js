@@ -23,7 +23,10 @@ module.exports = {
         };
     },
     errorCode(errorCode) {
-        this.ctx.body = error[errorCode] || error.NOERROR;
+        this.ctx.body = error[errorCode] || {
+            code: '10500',
+            msg: '未知错误，请复制错误码' + new Date().getTime() + '联系我们'
+        };
     },
     toJSON(data, msg, code) {
         this.ctx.body = {

@@ -13,7 +13,9 @@ const handler = async(ctx, next) => {
         if(ctx.response.status == 404) {
             ctx.errorCode('NOTFOUND');     // 以后也可以自己渲染一个页面
         } else {
-            ctx.error(ctx.response.status + '，未知错误，请复制错误码' + new Date().getTime() + '联系我们');
+            // ctx.error(ctx.response.status + '，未知错误，请复制错误码' + new Date().getTime() + '联系我们');
+            ctx.errorCode(err.message);
+            // ctx.errorFn(ctx.response.status);
         }
 
         accessSimpleLogger.error(url + err);        // 简单记录报错
