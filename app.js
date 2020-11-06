@@ -5,10 +5,12 @@ const Koa = require('koa');
 const app = new Koa();
 const views = require('koa-views');
 // const json = require('koa-json')
+require('~/core/prototype');
 const bodyparser = require('koa-bodyparser');       // 获取post请求的参数
 const {accessLogger, systemLogger, accessErrorLogger} = require('~/core/logger');
 const icefire = require('~/core/icefire/');
 
+const scheduleObj = require('~/core/schedule')();     // 定时任务
 const compress = require('koa-compress');   // 压缩
 const helmet = require('koa-helmet');       // 安全
 const favicon = require('koa-favicon');     // favicon
@@ -30,7 +32,8 @@ app.use(helmet());
 // 静态资源托管
 app.use(require('koa-static-server')({rootDir: __dirname + '/public', rootPath: '/public'}));
 
-app.use(favicon(__dirname + '/public/favicon.ico'));
+// app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/logo.png'));
 app.use(views(__dirname + '/views', {
     extension: 'pug'
 }));

@@ -1,3 +1,5 @@
+// jwt验证
+module.exports.secret = '冰火、黑白共存的世界';
 // signKey
 module.exports.pcName = '冰火世界';
 module.exports.pcKey = 'icefire';

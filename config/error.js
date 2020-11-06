@@ -39,5 +39,13 @@ module.exports = {
     'NOPHONE': {
         code: '10086',
         msg: '该用户尚未授权手机号，请授权'
+    },
+    'NOTENOUGH': {
+        code: '100999',
+        msg: '基本账户余额不足，请充值后重新发起'
+    },
+    'CARERROR': {
+        code: '10005',
+        msg: '请刷新购物车'
     }
 }

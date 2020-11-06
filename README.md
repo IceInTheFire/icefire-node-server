@@ -63,6 +63,9 @@ nodemon：测试环境下，数据库分表暂且有个bug，不影响线上操�
     本程序的开始
 15、auto.js
     生成模型的方法
+16、schedule文件夹
+    是定时任务，first.js是定时任务模板
+    用的是node-schedule插件
 ```
 
 #### ctx方法
@@ -77,10 +80,6 @@ nodemon：测试环境下，数据库分表暂且有个bug，不影响线上操�
 #### mysql操作介绍（数据库分表）
 ```
     config文件夹下的sql.js
-        subTable属性：是否分表的选项。
-            true：为分表。（水平分表，根据id分表，当id超过百万时，分表）
-                service文件夹下的base.js里增删改查是分表的增删改查写法，分表暂不支持联表查询。若在意联表查询的话，可以设置为false
-            false：为普通的sequelize写法，
 
         stepCount属性：在subTable为true下有用
             水平分表是当表的自增长id大于多少时则分表，默认是百万。
@@ -90,10 +89,6 @@ nodemon：测试环境下，数据库分表暂且有个bug，不影响线上操�
         timestamp属性：这个参数为true是MySQL会自动给每条数据添加createdAt和updateAt字段。createdAt和updateAt需要我们自己在新建表时定义（sequelize的字段）
 
         paranoid属性：设置 deletedAt 字段，当删除一条记录的时候，并不是真的销毁记录，而是通过该字段来标示，即保留数据，进行假删除，默认为false   仅在timestamp启用下使用。  deletedAt需要我们自己在新建表时定义（sequelize的字段）
-
-    注：
-    step表是标识分表用的，切忌不能删除，一删，分表就出问题了。
-    每新增一张表的时候，设置字段自增长id，还要在step表里加上新增表的名称并赋值为0
 ```
 #### 跑项目之前
 0、环境配置
@@ -129,7 +124,7 @@ http://localhost:3001/api/base/test/index4
 
 # mysql测试页面地址请求
 #### 增
-http://localhost:3001/api/base/test/dbInsert?name=冰火&age=15&sex=1     # 若在config/sql.js里subTable为true且stepCount对象下的user为10，则访问该地址十多次二十多次，可看到数据库里分表。
+http://localhost:3001/api/base/test/dbInsert?name=冰火&age=15&sex=1     
 
 #### 查
 http://localhost:3001/api/base/test/dbFindAndCountAll

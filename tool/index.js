@@ -1,4 +1,7 @@
 'use strict';
+const axios = require('axios');
+const Qs = require('qs');
+const permissionList = require('~/tool/permissionList.js');
 /**
  * 工具大全
  */
@@ -34,6 +37,12 @@ module.exports = {
             return str;
         }
     },
+
+    httpGet,
+    httpPost,
+
+    permissionList: permissionList.permissionList,
+    allPermissionList: permissionList.allPermissionList
 };
 
 /**
@@ -81,4 +90,40 @@ function isInt(str) {
     } else {
         return true;
     }
+}
+
+async function httpPost({url, params}) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let response = await axios({
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                url: url,
+                data: JSON.stringify(params),
+                // responseType: 'arraybuffer',
+                success(data) {
+                    console.log(data);
+                }
+            });
+            resolve(response);
+        } catch (err) {
+            reject(err);
+        }
+    });
+}
+
+async function httpGet({url, params}) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            axios.get(url, {
+                params: params
+            }).then((response) => {
+                resolve(response.data);
+            }).catch((error) => {
+                reject(error);
+            });
+        } catch (err) {
+            reject(err);
+        }
+    });
 }

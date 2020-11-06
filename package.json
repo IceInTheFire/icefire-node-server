@@ -6,13 +6,15 @@
     "dev": "./node_modules/.bin/nodemon bin/debug",
     "dev-model": "./node_modules/.bin/nodemon bin/debug -i ./models",
     "start-debug": "node bin/debug",
-    "start": "node bin/api",
+    "start": "node bin/rrxapi",
     "model": "node auto",
-    "prd": "pm2 start bin/api"
+    "prd": "pm2 start bin/rrxapi"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "babel-eslint": "^10.0.3",
     "best-require": "^1.1.4",
+    "busboy": "^0.3.1",
     "crypto-js": "^3.1.9-1",
     "debug": "^2.6.3",
     "eslint": "^3.6.0",
@@ -21,6 +23,7 @@
     "eslint-plugin-import": "^1.16.0",
     "eslint-plugin-jsx-a11y": "^2.2.2",
     "eslint-plugin-react": "^6.3.0",
+    "jwt-simple": "^0.5.6",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
     "koa-compress": "^3.0.0",
@@ -33,10 +36,17 @@
     "koa-views": "^5.2.1",
     "mysql": "^2.16.0",
     "mysql2": "^1.6.5",
+    "node-schedule": "^1.3.2",
     "pug": "^2.0.0-rc.1",
     "redis": "^2.8.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "sequelize": "^5.21.6",
-    "sequelize-auto": "^0.4.29"
+    "sequelize-auto": "^0.4.29",
+    "underscore": "^1.10.2",
+    "xlsx": "^0.16.2",
+    "xml2js": "^0.4.23",
+    "xmlreader": "^0.2.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.3"

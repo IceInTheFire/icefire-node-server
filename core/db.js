@@ -90,14 +90,21 @@ async function dbInit() {
         config.user,
         config.password,
         {
+            'query': {raw: true},
+            // 'create':{raw:true},
+            // define: {
+            //     raw: true  // 设置为 true，即可返回源数据
+            // },
             'dialect': 'mysql', // 数据库使用mysql
             'host': config.host, // 数据库服务器ip
             'port': config.port, // 数据库运行端口
-            'timestamp': false, // 这个参数为true是MySQL会自动给每条数据添加createdAt和updateAt字段
+            'paranoid': config.paranoid,
+            'timestamp': config.timestamp, // 这个参数为true是MySQL会自动给每条数据添加createdAt和updateAt字段
             'quoteIdentifiers': true,
             // logging: (message) => {sqlLog.info(message)}
         },
     );
+    module.exports.sequelize = sequelize;
 
     if (config.subTable) {
         const tool = {

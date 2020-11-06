@@ -18,27 +18,7 @@ class testService {
         sex ? options.where.sex = sex : '';
         age ? options.where.age = age : '';
         id ? options.where.id = id : '';
-        /*
-                * 分表写法 start
-                * */
-        if (id) { // 若id有值，则可以用sequelize的方式，
-            result = await ctx.db.User.findAll(options);
-        } else {    // 若无值
-            delete options.where.id;
-            result = await ctx.db.tool.findAll({ctx, tableName: 'user', options});
-        }
-        /*
-         * 分表写法 end
-         * */
-        /*
-        * 非分表写法 start
-        * 用sequelize的方式，
-        * */
-        // result = await ctx.db.User.findAll(options);
-        /*
-        * 非分表写法 end
-        * */
-
+        result = await ctx.db.User.findAll(options);
         return result;
     }
 
@@ -53,26 +33,8 @@ class testService {
         sex ? options.where.sex = sex : '';
         age ? options.where.age = age : '';
         id ? options.where.id = id : '';
-        /*
-                * 分表写法 start
-                * */
-        if (id) { // 若id有值，则可以用sequelize的方式，
-            result = await ctx.db.User.findAndCountAll(options);
-        } else {    // 若无值
-            delete options.where.id;
-            result = await ctx.db.tool.findAndCountAll({ctx, tableName: 'user', options});
-        }
-        /*
-         * 分表写法 end
-         * */
-        /*
-        * 非分表写法 start
-        * 用sequelize的方式，
-        * */
-        // result = await ctx.db.User.findAndCountAll(options);
-        /*
-        * 非分表写法 end
-        * */
+
+        result = await ctx.db.User.findAndCountAll(options);
 
         return result;
     }
@@ -88,26 +50,7 @@ class testService {
         sex ? options.where.sex = sex : '';
         age ? options.where.age = age : '';
         id ? options.where.id = id : '';
-        /*
-                * 分表写法 start
-                * */
-        if (id) { // 若id有值，则可以用sequelize的方式，
-            result = await ctx.db.User.findOne(options);
-        } else {    // 若无值
-            result = await ctx.db.tool.findOne({ctx, tableName: 'user', options});
-        }
-        /*
-         * 分表写法 end
-         * */
-        /*
-        * 非分表写法 start
-        * 用sequelize的方式，
-        * */
-        // result = await ctx.db.User.findAll(options);
-        /*
-        * 非分表写法 end
-        * */
-
+        result = await ctx.db.User.findAll(options);
         return result;
     }
 
@@ -121,25 +64,7 @@ class testService {
         }];
         id ? options[1].where.id = id : '';
         let result = null;
-        /*
-        * 分表写法 start
-        * */
-        if (id) { // 若id有值，则可以用sequelize的方式，
-            result = await ctx.db.User.update(...options);
-        } else {    // 若无值
-            result = await ctx.db.tool.update({ctx, tableName: 'user', options});
-        }
-        /*
-         * 分表写法 end
-         * */
-        /*
-        * 非分表写法 start
-        * 用sequelize的方式，
-        * */
-        // result = await ctx.db.User.update(...options);
-        /*
-        * 非分表写法 end
-        * */
+        result = await ctx.db.User.update(...options);
         return result;
     }
 
@@ -158,25 +83,7 @@ class testService {
         age ? options.where.age = age : '';
         id ? options.where.id = id : '';
         let result = null;
-        /*
-        * 分表写法 start
-        * */
-        if (id) { // 若id有值，则可以用sequelize的方式，
-            result = await ctx.db.User.destroy(options);
-        } else {    // 若无值
-            result = await ctx.db.tool.destroy({ctx, tableName: 'user', options});
-        }
-        /*
-         * 分表写法 end
-         * */
-        /*
-        * 非分表写法 start
-        * 用sequelize的方式，
-        * */
-        // result = await ctx.db.User.destroy(options);
-        /*
-        * 非分表写法 end
-        * */
+        result = await ctx.db.User.destroy(options);
         return result;
     }
 
